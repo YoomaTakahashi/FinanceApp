@@ -11,21 +11,23 @@ export default defineNuxtConfig({
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         config.plugins?.push(vuetify({ autoImport: true }))
       })
+
+      // Workaround for Nuxt 3.21 bug: resolveServerEntry called with client config
+      // when ssr:false (client rollup input uses key "entry", resolveServerEntry
+      // looks for "server"). Only the DEV server hits that code path — in production
+      // builds the extra "server" input creates a duplicate entry chunk and the main
+      // entry CSS (vuetify/styles) never gets linked in the HTML shell.
+      if (!nuxt.options.dev) return
+      nuxt.hooks.hook('vite:extendConfig', (config, { isClient }) => {
+        if (!isClient) return
+        const input = config.build?.rollupOptions?.input
+        if (input && typeof input === 'object' && !Array.isArray(input)) {
+          const inp = input as Record<string, string>
+          if (inp.entry && !inp.server) inp.server = inp.entry
+        }
+      })
     },
   ],
-
-  // Workaround for Nuxt 3.21 bug: resolveServerEntry called with client config when ssr:false.
-  // The client rollup input uses key "entry" but resolveServerEntry looks for "server".
-  hooks: {
-    'vite:extendConfig'(config, { isClient }) {
-      if (!isClient) return
-      const input = config.build?.rollupOptions?.input
-      if (input && typeof input === 'object' && !Array.isArray(input)) {
-        const inp = input as Record<string, string>
-        if (inp.entry && !inp.server) inp.server = inp.entry
-      }
-    },
-  },
 
   css: [
     'vuetify/styles',
