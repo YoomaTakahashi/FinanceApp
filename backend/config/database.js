@@ -5,11 +5,24 @@ require('dotenv').config();
 // local development uses discrete DB_* variables.
 const connectionUrl = process.env.MYSQL_URL || process.env.DATABASE_URL;
 
+// Debug aid: show which DB-related env vars this process actually received
+// (key names only — values are never logged). RAILWAY_* keys prove whether
+// Railway injected anything at all into this container.
+const envKeys     = Object.keys(process.env);
+const dbKeys      = envKeys.filter((k) => /^(DB_|MYSQL|DATABASE_URL)/.test(k)).sort();
+const railwayKeys = envKeys.filter((k) => k.startsWith('RAILWAY_')).sort();
+console.log('🔎 DB-related env keys visible to this process:', dbKeys.length ? dbKeys : '(none)');
+console.log('🔎 Railway-injected env keys:', railwayKeys.length ? railwayKeys : '(none — not running on Railway, or no vars applied)');
+
 if (!connectionUrl && !process.env.DB_HOST) {
-  console.warn(
-    '⚠️  No MYSQL_URL/DATABASE_URL and no DB_HOST set — falling back to localhost/root defaults.\n' +
-    '    This will fail in production. On Railway, set MYSQL_URL=${{MySQL.MYSQL_URL}}\n' +
-    '    (or the DB_HOST/DB_PORT/DB_USER/DB_PASSWORD/DB_NAME variables) on this service.'
+  throw new Error(
+    'Database configuration missing: neither MYSQL_URL/DATABASE_URL nor DB_HOST is set.\n' +
+    'Refusing to fall back to localhost/root defaults.\n' +
+    '  - On Railway: open the BACKEND service (not the MySQL service) → Variables tab,\n' +
+    '    add MYSQL_URL=${{MySQL.MYSQL_URL}} and press the "Deploy"/"Apply changes" button —\n' +
+    '    staged variables are NOT applied until you deploy them.\n' +
+    '  - Locally: create backend/.env from backend/.env.example.\n' +
+    `  - Env keys this process can see: DB-related=[${dbKeys.join(', ') || 'none'}], RAILWAY=[${railwayKeys.join(', ') || 'none'}]`
   );
 }
 
