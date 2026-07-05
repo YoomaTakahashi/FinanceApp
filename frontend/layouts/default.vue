@@ -131,25 +131,35 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from 'vue-toastification'
+
 const authStore     = useAuthStore()
 const notifStore    = useNotificationStore()
 const settingsStore = useSettingsStore()
 const route         = useRoute()
 const router        = useRouter()
 const config        = useRuntimeConfig()
+const toast         = useToast()
 const { t, locale } = useLocale()
+const { notifTitle, notifMessage } = useNotifText()
 
 const drawer = ref(true)
 
-const navItems = computed(() => [
-  { to: '/',              icon: 'mdi-view-dashboard-outline', title: t('nav.dashboard') },
-  { to: '/transactions',  icon: 'mdi-swap-horizontal',        title: t('nav.transactions') },
-  { to: '/categories',    icon: 'mdi-tag-multiple-outline',   title: t('nav.categories') },
-  { to: '/reports',       icon: 'mdi-chart-bar',              title: t('nav.reports') },
-  { to: '/notifications', icon: 'mdi-bell-outline',           title: t('nav.notifications') },
-  { to: '/settings',      icon: 'mdi-cog-outline',            title: t('nav.settings') },
-  { to: '/profile',       icon: 'mdi-account-circle-outline', title: t('nav.profile') },
-])
+const navItems = computed(() => {
+  const items = [
+    { to: '/',              icon: 'mdi-view-dashboard-outline', title: t('nav.dashboard') },
+    { to: '/transactions',  icon: 'mdi-swap-horizontal',        title: t('nav.transactions') },
+    { to: '/categories',    icon: 'mdi-tag-multiple-outline',   title: t('nav.categories') },
+    { to: '/reports',       icon: 'mdi-chart-bar',              title: t('nav.reports') },
+    { to: '/notifications', icon: 'mdi-bell-outline',           title: t('nav.notifications') },
+    { to: '/settings',      icon: 'mdi-cog-outline',            title: t('nav.settings') },
+    { to: '/profile',       icon: 'mdi-account-circle-outline', title: t('nav.profile') },
+  ]
+  if (authStore.isAdmin) {
+    items.push({ to: '/admin', icon: 'mdi-shield-account-outline', title: t('nav.admin') })
+  }
+  return items
+})
 
 const pageTitleMap = computed<Record<string, string>>(() => ({
   '/':              t('nav.dashboard'),
@@ -159,6 +169,7 @@ const pageTitleMap = computed<Record<string, string>>(() => ({
   '/notifications': t('nav.notifications'),
   '/settings':      t('nav.settings'),
   '/profile':       t('nav.profile'),
+  '/admin':         t('nav.admin'),
 }))
 
 const pageTitle = computed(() => pageTitleMap.value[route.path] || 'FinanceApp')
@@ -194,10 +205,15 @@ watch(locale, (lang) => {
   }
 }, { immediate: true })
 
-// Poll unread count
+// Poll for new notifications — updates the badge and pops a toast for new ones
 onMounted(() => {
-  notifStore.fetchUnreadCount().catch(() => {})
-  const interval = setInterval(() => notifStore.fetchUnreadCount().catch(() => {}), 60_000)
+  notifStore.checkNew().catch(() => {})
+  const interval = setInterval(async () => {
+    try {
+      const fresh = await notifStore.checkNew()
+      fresh.forEach((n: any) => toast.info(`${notifTitle(n)}\n${notifMessage(n)}`))
+    } catch {}
+  }, 30_000)
   onUnmounted(() => clearInterval(interval))
 })
 </script>

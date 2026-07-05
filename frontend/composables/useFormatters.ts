@@ -1,10 +1,23 @@
 import dayjs from 'dayjs'
+import 'dayjs/locale/th'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import buddhistEra from 'dayjs/plugin/buddhistEra'
 
 dayjs.extend(relativeTime)
+dayjs.extend(buddhistEra)
+
+// English format → Thai equivalent (Buddhist era year)
+const thaiFormatMap: Record<string, string> = {
+  'MMM DD, YYYY':       'DD MMM BBBB',
+  'MMM DD, YYYY HH:mm': 'DD MMM BBBB HH:mm',
+  'MMM DD':             'DD MMM',
+}
 
 export function useFormatters() {
   const settingsStore = useSettingsStore()
+  const { t } = useLocale()
+
+  const isThai = () => (settingsStore.settings?.language || 'en') === 'th'
 
   function currency(amount: number | string, showSign = false) {
     const num    = parseFloat(String(amount)) || 0
@@ -18,15 +31,18 @@ export function useFormatters() {
   }
 
   function formatDate(date: string | Date, fmt = 'MMM DD, YYYY') {
+    if (isThai()) {
+      return dayjs(date).locale('th').format(thaiFormatMap[fmt] || fmt)
+    }
     return dayjs(date).format(fmt)
   }
 
   function formatDateTime(date: string | Date) {
-    return dayjs(date).format('MMM DD, YYYY HH:mm')
+    return formatDate(date, 'MMM DD, YYYY HH:mm')
   }
 
   function fromNow(date: string | Date) {
-    return dayjs(date).fromNow()
+    return dayjs(date).locale(isThai() ? 'th' : 'en').fromNow()
   }
 
   function capitalize(str: string) {
@@ -35,8 +51,11 @@ export function useFormatters() {
 
   function paymentMethodLabel(method: string) {
     const map: Record<string, string> = {
-      cash: 'Cash', card: 'Card', bank_transfer: 'Bank Transfer',
-      e_wallet: 'E-Wallet', other: 'Other',
+      cash:          t('pay.cash'),
+      card:          t('pay.card'),
+      bank_transfer: t('pay.bank'),
+      e_wallet:      t('pay.ewallet'),
+      other:         t('pay.other'),
     }
     return map[method] || method
   }

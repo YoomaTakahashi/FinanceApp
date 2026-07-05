@@ -82,7 +82,7 @@
             v-model="form.monthly_budget"
             :label="t('settings.budget_label')"
             type="number"
-            prepend-inner-icon="mdi-currency-usd"
+            :prefix="form.currency_symbol || '$'"
             hide-details
             clearable
           />

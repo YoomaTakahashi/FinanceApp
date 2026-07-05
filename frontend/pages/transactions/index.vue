@@ -19,7 +19,7 @@
         <v-col cols="12" sm="4">
           <v-text-field
             v-model="search"
-            label="Search"
+            :label="t('search')"
             prepend-inner-icon="mdi-magnify"
             clearable
             hide-details
@@ -160,8 +160,8 @@
         <template #no-data>
           <div class="empty-state py-12">
             <v-icon size="64" class="text-disabled">mdi-swap-horizontal</v-icon>
-            <p class="text-body-1 mt-4 text-disabled">No transactions found</p>
-            <v-btn class="btn-gold mt-4" size="small" @click="openAdd">Add Transaction</v-btn>
+            <p class="text-body-1 mt-4 text-disabled">{{ t('tx.no_found') }}</p>
+            <v-btn class="btn-gold mt-4" size="small" @click="openAdd">{{ t('dashboard.add_tx') }}</v-btn>
           </div>
         </template>
       </v-data-table-server>
@@ -191,7 +191,7 @@
     <v-dialog v-model="slipDialog" max-width="800">
       <v-card class="glass-card" rounded="xl">
         <v-card-title class="d-flex align-center pa-4">
-          Payment Slip
+          {{ t('txdlg.payment_slip') }}
           <v-spacer />
           <v-btn icon variant="text" @click="slipDialog = false"><v-icon>mdi-close</v-icon></v-btn>
         </v-card-title>

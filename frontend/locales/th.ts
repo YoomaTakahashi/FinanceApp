@@ -14,6 +14,7 @@ const th: Record<LocaleKey, string> = {
   'nav.notifications': 'การแจ้งเตือน',
   'nav.settings': 'ตั้งค่า',
   'nav.profile': 'โปรไฟล์ของฉัน',
+  'nav.admin': 'ผู้ดูแลระบบ',
 
   // Common actions
   save: 'บันทึก',
@@ -195,6 +196,10 @@ const th: Record<LocaleKey, string> = {
   'notif.read_filter': 'อ่านแล้ว',
   'notif.empty': 'ไม่มีการแจ้งเตือน',
   'notif.marked_all': 'ทำเครื่องหมายอ่านทั้งหมดแล้ว',
+  'notif.welcome_title': 'ยินดีต้อนรับสู่ FinanceApp!',
+  'notif.welcome_msg': 'สร้างบัญชีของคุณเรียบร้อยแล้ว เริ่มติดตามการเงินของคุณได้เลยวันนี้',
+  'notif.large_expense_title': 'แจ้งเตือนรายจ่ายก้อนใหญ่',
+  'notif.large_expense_msg': 'คุณบันทึกรายจ่ายก้อนใหญ่จำนวน {amount} สำหรับ "{title}"',
 
   // Profile
   'profile.title': 'โปรไฟล์ของฉัน',
@@ -238,6 +243,36 @@ const th: Record<LocaleKey, string> = {
   'status.completed': 'เสร็จสิ้น',
   'status.pending': 'รอดำเนินการ',
   'status.cancelled': 'ยกเลิก',
+
+  // Misc
+  loading: 'กำลังโหลด...',
+  'auth.remember': 'จดจำฉันไว้',
+
+  // Admin
+  'admin.title': 'ระบบผู้ดูแล',
+  'admin.subtitle': 'จัดการผู้ใช้และดูภาพรวมระบบ',
+  'admin.total_users': 'ผู้ใช้ทั้งหมด',
+  'admin.active_users': 'ใช้งานอยู่',
+  'admin.admins': 'ผู้ดูแล',
+  'admin.total_tx': 'รายการทั้งหมด',
+  'admin.users': 'ผู้ใช้',
+  'admin.col_user': 'ผู้ใช้',
+  'admin.col_role': 'บทบาท',
+  'admin.col_status': 'สถานะ',
+  'admin.col_tx': 'รายการ',
+  'admin.col_joined': 'สมัครเมื่อ',
+  'admin.edit_user': 'แก้ไขผู้ใช้',
+  'admin.active': 'ใช้งาน',
+  'admin.suspended': 'ระงับ',
+  'admin.account_active': 'บัญชีใช้งานได้',
+  'admin.updated': 'อัปเดตผู้ใช้แล้ว!',
+  'admin.search_users': 'ค้นหาชื่อหรืออีเมล',
+
+  // Validation / errors
+  'err.title_required': 'กรุณากรอกชื่อรายการ',
+  'err.amount_invalid': 'จำนวนเงินต้องมากกว่า 0',
+  'err.date_required': 'กรุณาเลือกวันที่',
+  'err.save_failed': 'บันทึกไม่สำเร็จ',
 }
 
 export default th

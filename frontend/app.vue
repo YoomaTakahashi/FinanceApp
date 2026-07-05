@@ -3,7 +3,7 @@
     <div v-if="pageLoading" class="route-loading">
       <div class="route-loading__card">
         <div class="route-loading__spinner" />
-        <span class="route-loading__text">Loading...</span>
+        <span class="route-loading__text">{{ t('loading') }}</span>
       </div>
     </div>
   </Transition>
@@ -15,6 +15,7 @@
 <script setup lang="ts">
 const authStore     = useAuthStore()
 const settingsStore = useSettingsStore()
+const { t }         = useLocale()
 
 authStore.loadFromStorage()
 

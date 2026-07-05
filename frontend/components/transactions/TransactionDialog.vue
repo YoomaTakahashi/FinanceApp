@@ -40,7 +40,7 @@
                 v-model="form.title"
                 :label="t('txdlg.title')"
                 prepend-inner-icon="mdi-text"
-                :rules="[v => !!v || t('txdlg.title')]"
+                :rules="[v => !!v || t('err.title_required')]"
               />
             </v-col>
 
@@ -48,12 +48,12 @@
             <v-col cols="12" sm="6">
               <v-text-field
                 v-model="form.amount"
-                label="Amount *"
+                :label="t('txdlg.amount')"
                 type="number"
-                prepend-inner-icon="mdi-currency-usd"
+                :prefix="currencySymbol"
                 min="0"
                 step="0.01"
-                :rules="[v => !!v && v > 0 || 'Valid amount required']"
+                :rules="[v => !!v && v > 0 || t('err.amount_invalid')]"
               />
             </v-col>
 
@@ -61,7 +61,7 @@
             <v-col cols="12" sm="6">
               <v-select
                 v-model="form.category_id"
-                label="Category"
+                :label="t('category')"
                 :items="categoryItems"
                 item-title="name"
                 item-value="id"
@@ -82,10 +82,10 @@
             <v-col cols="12" sm="6">
               <v-text-field
                 v-model="form.transaction_date"
-                label="Date *"
+                :label="t('txdlg.date')"
                 type="date"
                 prepend-inner-icon="mdi-calendar"
-                :rules="[v => !!v || 'Date is required']"
+                :rules="[v => !!v || t('err.date_required')]"
               />
             </v-col>
 
@@ -93,7 +93,7 @@
             <v-col cols="12" sm="6">
               <v-text-field
                 v-model="form.transaction_time"
-                label="Time"
+                :label="t('txdlg.time')"
                 type="time"
                 prepend-inner-icon="mdi-clock-outline"
               />
@@ -103,7 +103,7 @@
             <v-col cols="12" sm="6">
               <v-select
                 v-model="form.payment_method"
-                label="Payment Method"
+                :label="t('txdlg.method')"
                 :items="paymentMethods"
                 prepend-inner-icon="mdi-credit-card-outline"
               />
@@ -113,8 +113,8 @@
             <v-col cols="12" sm="6">
               <v-select
                 v-model="form.status"
-                label="Status"
-                :items="['completed', 'pending', 'cancelled']"
+                :label="t('txdlg.status')"
+                :items="statusItems"
                 prepend-inner-icon="mdi-check-circle-outline"
               />
             </v-col>
@@ -123,7 +123,7 @@
             <v-col cols="12">
               <v-textarea
                 v-model="form.description"
-                label="Description"
+                :label="t('txdlg.description')"
                 rows="2"
                 prepend-inner-icon="mdi-text-long"
                 auto-grow
@@ -134,7 +134,7 @@
             <v-col cols="12">
               <v-textarea
                 v-model="form.note"
-                label="Note"
+                :label="t('txdlg.note')"
                 rows="2"
                 prepend-inner-icon="mdi-note-outline"
                 auto-grow
@@ -152,8 +152,8 @@
               <div v-if="existingSlip && !newSlipFile" class="slip-preview mb-3">
                 <v-img :src="slipUrl" max-height="200" contain />
                 <div class="d-flex ga-2 pa-2">
-                  <v-btn size="x-small" color="primary" variant="tonal" @click="viewSlip">View</v-btn>
-                  <v-btn size="x-small" color="error" variant="tonal" @click="removeSlip">Remove</v-btn>
+                  <v-btn size="x-small" color="primary" variant="tonal" @click="viewSlip">{{ t('view') }}</v-btn>
+                  <v-btn size="x-small" color="error" variant="tonal" @click="removeSlip">{{ t('remove') }}</v-btn>
                 </div>
               </div>
 
@@ -161,14 +161,14 @@
               <div v-if="newSlipFile" class="slip-preview mb-3">
                 <v-img :src="newSlipPreview" max-height="200" contain />
                 <div class="pa-2">
-                  <v-btn size="x-small" color="error" variant="tonal" @click="clearNewSlip">Remove</v-btn>
+                  <v-btn size="x-small" color="error" variant="tonal" @click="clearNewSlip">{{ t('remove') }}</v-btn>
                 </div>
               </div>
 
               <v-file-input
                 v-if="!newSlipFile"
                 v-model="slipInput"
-                label="Upload slip (JPG/PNG)"
+                :label="t('txdlg.upload')"
                 accept="image/jpeg,image/jpg,image/png"
                 prepend-icon=""
                 prepend-inner-icon="mdi-upload"
@@ -198,7 +198,7 @@
   <v-dialog v-model="slipViewer" max-width="800">
     <v-card class="glass-card" rounded="xl">
       <v-card-title class="d-flex align-center pa-4">
-        <span>Payment Slip</span>
+        <span>{{ t('txdlg.payment_slip') }}</span>
         <v-spacer />
         <v-btn icon variant="text" @click="slipViewer = false"><v-icon>mdi-close</v-icon></v-btn>
       </v-card-title>
@@ -216,11 +216,14 @@ const props = defineProps<{
 const emit = defineEmits(['saved'])
 const model = defineModel<boolean>()
 
-const txStore  = useTransactionStore()
-const catStore = useCategoryStore()
-const config   = useRuntimeConfig()
-const toast    = useToast()
-const { t }    = useLocale()
+const txStore       = useTransactionStore()
+const catStore      = useCategoryStore()
+const settingsStore = useSettingsStore()
+const config        = useRuntimeConfig()
+const toast         = useToast()
+const { t }         = useLocale()
+
+const currencySymbol = computed(() => settingsStore.settings?.currency_symbol || '$')
 
 const formRef     = ref()
 const saving      = ref(false)
@@ -247,6 +250,12 @@ const paymentMethods = computed(() => [
   { title: t('pay.bank'),    value: 'bank_transfer' },
   { title: t('pay.ewallet'), value: 'e_wallet' },
   { title: t('pay.other'),   value: 'other' },
+])
+
+const statusItems = computed(() => [
+  { title: t('status.completed'), value: 'completed' },
+  { title: t('status.pending'),   value: 'pending' },
+  { title: t('status.cancelled'), value: 'cancelled' },
 ])
 
 const form = reactive({
@@ -326,15 +335,15 @@ async function handleSave() {
   const amount = parseFloat(String(form.amount || ''))
 
   if (!title) {
-    toast.error(t('txdlg.title') + ' is required')
+    toast.error(t('err.title_required'))
     return
   }
   if (!amount || amount <= 0) {
-    toast.error('Amount must be greater than 0')
+    toast.error(t('err.amount_invalid'))
     return
   }
   if (!form.transaction_date) {
-    toast.error('Date is required')
+    toast.error(t('err.date_required'))
     return
   }
 
@@ -372,7 +381,7 @@ async function handleSave() {
     model.value = false
     emit('saved')
   } catch (err: any) {
-    toast.error(err.message || 'Failed to save')
+    toast.error(err.message || t('err.save_failed'))
   } finally {
     saving.value = false
   }

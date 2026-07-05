@@ -56,12 +56,12 @@
           </div>
           <div class="flex-1">
             <div class="d-flex align-center justify-space-between mb-1">
-              <span class="text-body-2 font-weight-medium text-high-emphasis">{{ notif.title }}</span>
+              <span class="text-body-2 font-weight-medium text-high-emphasis">{{ notifTitle(notif) }}</span>
               <span class="text-caption ml-2 text-medium-emphasis">
                 {{ f.fromNow(notif.created_at) }}
               </span>
             </div>
-            <p class="text-body-2 mb-0 text-medium-emphasis">{{ notif.message }}</p>
+            <p class="text-body-2 mb-0 text-medium-emphasis">{{ notifMessage(notif) }}</p>
           </div>
           <div class="ml-3 d-flex align-center ga-1">
             <div v-if="!notif.is_read" class="unread-dot" />
@@ -84,6 +84,7 @@ const notifStore = useNotificationStore()
 const toast      = useToast()
 const f          = useFormatters()
 const { t }      = useLocale()
+const { notifTitle, notifMessage } = useNotifText()
 
 const activeFilter = ref('')
 const filters = [

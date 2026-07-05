@@ -7,6 +7,7 @@ export const useNotificationStore = defineStore('notifications', {
     meta:        null as any,
     unreadCount: 0,
     loading:     false,
+    lastMaxId:   null as number | null,
   }),
 
   actions: {
@@ -29,6 +30,26 @@ export const useNotificationStore = defineStore('notifications', {
       const res        = await get('/notifications/unread-count')
       this.unreadCount = res.data.count
       return res.data.count
+    },
+
+    // Poll for notifications that arrived since the last check.
+    // Returns the new ones so the caller can show them as toasts.
+    async checkNew(): Promise<any[]> {
+      const { get } = useApi()
+      const res        = await get('/notifications', { page: 1, limit: 5 })
+      this.unreadCount = res.unread_count
+      const items      = res.data || []
+      const maxId      = items.length ? Math.max(...items.map((n: any) => n.id)) : 0
+
+      // First check of the session: remember where we are, don't toast old items
+      if (this.lastMaxId === null) {
+        this.lastMaxId = maxId
+        return []
+      }
+
+      const fresh = items.filter((n: any) => n.id > this.lastMaxId!)
+      if (maxId > this.lastMaxId) this.lastMaxId = maxId
+      return fresh
     },
 
     async markRead(id: number) {

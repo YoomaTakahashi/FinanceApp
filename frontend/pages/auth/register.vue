@@ -1,14 +1,14 @@
 <template>
   <div class="login-card glass-card rounded-2xl pa-8 w-100">
     <div class="text-center mb-8">
-      <h1 class="text-h5 font-weight-bold text-white mb-1">Create Account</h1>
-      <p class="text-body-2" style="color:rgba(255,255,255,0.5)">Start managing your finances today</p>
+      <h1 class="text-h5 font-weight-bold text-white mb-1">{{ t('auth.create') }}</h1>
+      <p class="text-body-2" style="color:rgba(255,255,255,0.5)">{{ t('auth.create_sub') }}</p>
     </div>
 
     <v-form @submit.prevent="handleRegister">
       <v-text-field
         v-model="form.name"
-        label="Full Name"
+        :label="t('profile.full_name')"
         prepend-inner-icon="mdi-account-outline"
         :error-messages="errors.name"
         class="mb-3"
@@ -17,7 +17,7 @@
 
       <v-text-field
         v-model="form.email"
-        label="Email Address"
+        :label="t('profile.email')"
         type="email"
         prepend-inner-icon="mdi-email-outline"
         :error-messages="errors.email"
@@ -27,7 +27,7 @@
 
       <v-text-field
         v-model="form.password"
-        label="Password"
+        :label="t('password')"
         :type="showPass ? 'text' : 'password'"
         prepend-inner-icon="mdi-lock-outline"
         :append-inner-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
@@ -39,7 +39,7 @@
 
       <v-text-field
         v-model="form.confirmPassword"
-        label="Confirm Password"
+        :label="t('auth.confirm_pass')"
         :type="showPass ? 'text' : 'password'"
         prepend-inner-icon="mdi-lock-check-outline"
         :error-messages="errors.confirmPassword"
@@ -55,13 +55,13 @@
         :loading="loading"
         height="52"
       >
-        Create Account
+        {{ t('auth.create') }}
       </v-btn>
 
       <div class="text-center">
-        <span class="text-body-2" style="color:rgba(255,255,255,0.5)">Already have an account? </span>
+        <span class="text-body-2" style="color:rgba(255,255,255,0.5)">{{ t('auth.have_account') }} </span>
         <NuxtLink to="/auth/login" class="text-primary text-decoration-none font-weight-medium">
-          Sign In
+          {{ t('auth.signin') }}
         </NuxtLink>
       </div>
     </v-form>
@@ -75,6 +75,7 @@ definePageMeta({ layout: 'auth', middleware: 'auth' })
 
 const authStore = useAuthStore()
 const toast     = useToast()
+const { t }     = useLocale()
 
 const loading  = ref(false)
 const showPass = ref(false)

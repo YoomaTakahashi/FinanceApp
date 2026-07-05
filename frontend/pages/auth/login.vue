@@ -1,14 +1,14 @@
 <template>
   <div class="login-card glass-card rounded-2xl pa-8 w-100">
     <div class="text-center mb-8">
-      <h1 class="text-h5 font-weight-bold text-white mb-1">Welcome Back</h1>
-      <p class="text-body-2" style="color:rgba(255,255,255,0.5)">Sign in to your account</p>
+      <h1 class="text-h5 font-weight-bold text-white mb-1">{{ t('auth.welcome') }}</h1>
+      <p class="text-body-2" style="color:rgba(255,255,255,0.5)">{{ t('auth.signin_sub') }}</p>
     </div>
 
     <v-form @submit.prevent="handleLogin">
       <v-text-field
         v-model="form.email"
-        label="Email Address"
+        :label="t('profile.email')"
         type="email"
         prepend-inner-icon="mdi-email-outline"
         :error-messages="errors.email"
@@ -18,7 +18,7 @@
 
       <v-text-field
         v-model="form.password"
-        label="Password"
+        :label="t('password')"
         :type="showPass ? 'text' : 'password'"
         prepend-inner-icon="mdi-lock-outline"
         :append-inner-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
@@ -31,7 +31,7 @@
       <div class="d-flex align-center justify-space-between mb-6">
         <v-checkbox
           v-model="form.rememberMe"
-          label="Remember me"
+          :label="t('auth.remember')"
           density="compact"
           color="primary"
           hide-details
@@ -46,13 +46,13 @@
         :loading="loading"
         height="52"
       >
-        Sign In
+        {{ t('auth.signin') }}
       </v-btn>
 
       <div class="text-center">
-        <span class="text-body-2" style="color:rgba(255,255,255,0.5)">Don't have an account? </span>
+        <span class="text-body-2" style="color:rgba(255,255,255,0.5)">{{ t('auth.no_account') }} </span>
         <NuxtLink to="/auth/register" class="text-primary text-decoration-none font-weight-medium">
-          Sign Up
+          {{ t('auth.register') }}
         </NuxtLink>
       </div>
     </v-form>
@@ -66,6 +66,7 @@ definePageMeta({ layout: 'auth', middleware: 'auth' })
 
 const authStore = useAuthStore()
 const toast     = useToast()
+const { t }     = useLocale()
 
 const loading  = ref(false)
 const showPass = ref(false)

@@ -13,14 +13,14 @@
           class="action-btn"
           @click="$emit('cancel')"
           :disabled="loading"
-        >Cancel</v-btn>
+        >{{ t('cancel') }}</v-btn>
         <v-btn
           :color="confirmColor || 'error'"
           rounded="lg"
           class="action-btn"
           :loading="loading"
           @click="$emit('confirm')"
-        >{{ confirmText || 'Delete' }}</v-btn>
+        >{{ confirmText || t('delete') }}</v-btn>
       </div>
     </v-card>
   </v-dialog>
@@ -38,6 +38,7 @@ defineProps<{
 }>()
 defineEmits(['confirm', 'cancel'])
 
+const { t } = useLocale()
 const model = defineModel<boolean>()
 </script>
 

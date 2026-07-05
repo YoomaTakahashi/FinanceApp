@@ -158,7 +158,7 @@ const dashStore     = useDashboardStore()
 const authStore     = useAuthStore()
 const settingsStore = useSettingsStore()
 const f             = useFormatters()
-const { t }         = useLocale()
+const { t, locale } = useLocale()
 
 const isDark = computed(() => settingsStore.settings?.theme !== 'light')
 
@@ -194,13 +194,16 @@ const maxSpend = computed(() =>
   Math.max(...(dashStore.topCategories.map((c: any) => parseFloat(c.total) || 0)), 1)
 )
 
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+const SHORT_MONTHS: Record<string, string[]> = {
+  en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  th: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
+}
 
 const monthlyChartData = computed(() => ({
-  labels: MONTHS,
+  labels: SHORT_MONTHS[locale.value] || SHORT_MONTHS.en,
   datasets: [
     {
-      label:           'Income',
+      label:           t('tx.type_income'),
       data:            dashStore.monthlyChart.map((m: any) => m.income),
       borderColor:     '#66BB6A',
       backgroundColor: 'rgba(102,187,106,0.08)',
@@ -212,7 +215,7 @@ const monthlyChartData = computed(() => ({
       pointBackgroundColor: '#66BB6A',
     },
     {
-      label:           'Expense',
+      label:           t('tx.type_expense'),
       data:            dashStore.monthlyChart.map((m: any) => m.expense),
       borderColor:     '#EF5350',
       backgroundColor: 'rgba(239,83,80,0.08)',

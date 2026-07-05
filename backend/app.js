@@ -18,6 +18,7 @@ const dashboardRoutes    = require('./routes/dashboard');
 const notificationRoutes = require('./routes/notifications');
 const reportRoutes       = require('./routes/reports');
 const settingsRoutes     = require('./routes/settings');
+const adminRoutes        = require('./routes/admin');
 
 const app  = express();
 const PORT = process.env.PORT || 5000;
@@ -59,9 +60,15 @@ app.use(fileUpload({
   limits:      { fileSize: parseInt(process.env.UPLOAD_MAX_SIZE) || 5 * 1024 * 1024 },
   abortOnLimit: true,
   useTempFiles: false,
+  createParentPath: true,
 }));
 
 // ─── Static Files ─────────────────────────────────────────────
+// uploads/* are gitignored, so they don't exist on a fresh deploy — create them
+const fs = require('fs');
+for (const dir of ['uploads/slips', 'uploads/avatars']) {
+  fs.mkdirSync(path.join(__dirname, dir), { recursive: true });
+}
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ─── API Routes ───────────────────────────────────────────────
@@ -72,6 +79,7 @@ app.use('/api/dashboard',     dashboardRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/reports',       reportRoutes);
 app.use('/api/settings',      settingsRoutes);
+app.use('/api/admin',         adminRoutes);
 
 // ─── Health Check ─────────────────────────────────────────────
 app.get('/api/health', (req, res) => {

@@ -12,6 +12,7 @@ const en = {
   'nav.notifications': 'Notifications',
   'nav.settings': 'Settings',
   'nav.profile': 'My Profile',
+  'nav.admin': 'Admin',
 
   // Common actions
   save: 'Save',
@@ -193,6 +194,10 @@ const en = {
   'notif.read_filter': 'Read',
   'notif.empty': 'No notifications',
   'notif.marked_all': 'All marked as read',
+  'notif.welcome_title': 'Welcome to FinanceApp!',
+  'notif.welcome_msg': 'Your account has been created successfully. Start tracking your finances today.',
+  'notif.large_expense_title': 'Large Expense Alert',
+  'notif.large_expense_msg': 'You recorded a large expense of {amount} for "{title}"',
 
   // Profile
   'profile.title': 'My Profile',
@@ -236,6 +241,36 @@ const en = {
   'status.completed': 'Completed',
   'status.pending': 'Pending',
   'status.cancelled': 'Cancelled',
+
+  // Misc
+  loading: 'Loading...',
+  'auth.remember': 'Remember me',
+
+  // Admin
+  'admin.title': 'Admin Panel',
+  'admin.subtitle': 'Manage users and monitor the system',
+  'admin.total_users': 'Total Users',
+  'admin.active_users': 'Active Users',
+  'admin.admins': 'Admins',
+  'admin.total_tx': 'Total Transactions',
+  'admin.users': 'Users',
+  'admin.col_user': 'User',
+  'admin.col_role': 'Role',
+  'admin.col_status': 'Status',
+  'admin.col_tx': 'Transactions',
+  'admin.col_joined': 'Joined',
+  'admin.edit_user': 'Edit User',
+  'admin.active': 'Active',
+  'admin.suspended': 'Suspended',
+  'admin.account_active': 'Account active',
+  'admin.updated': 'User updated!',
+  'admin.search_users': 'Search name or email',
+
+  // Validation / errors
+  'err.title_required': 'Title is required',
+  'err.amount_invalid': 'Amount must be greater than 0',
+  'err.date_required': 'Date is required',
+  'err.save_failed': 'Failed to save',
 } as const
 
 export default en

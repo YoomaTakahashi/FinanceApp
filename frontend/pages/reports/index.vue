@@ -29,7 +29,7 @@
         <div v-if="period === 'weekly'" class="d-flex align-center ga-3">
           <v-text-field
             v-model="weekDate"
-            label="Week of"
+            :label="t('report.week_of')"
             type="date"
             hide-details
             density="compact"
@@ -43,7 +43,7 @@
           <v-select
             v-model="selectedMonth"
             :items="months"
-            label="Month"
+            :label="t('report.month')"
             hide-details density="compact"
             style="max-width:150px"
             @update:modelValue="fetch"
@@ -51,7 +51,7 @@
           <v-select
             v-model="selectedYear"
             :items="years"
-            label="Year"
+            :label="t('report.year')"
             hide-details density="compact"
             style="max-width:120px"
             @update:modelValue="fetch"
@@ -63,7 +63,7 @@
           <v-select
             v-model="selectedYear"
             :items="years"
-            label="Year"
+            :label="t('report.year')"
             hide-details density="compact"
             style="max-width:120px"
             @update:modelValue="fetch"
@@ -193,7 +193,7 @@ definePageMeta({ middleware: 'auth' })
 const { get }       = useApi()
 const f             = useFormatters()
 const settingsStore = useSettingsStore()
-const { t }         = useLocale()
+const { t, locale } = useLocale()
 const isDark        = computed(() => settingsStore.settings?.theme !== 'light')
 
 const period       = ref('monthly')
@@ -203,12 +203,13 @@ const weekDate     = ref(new Date().toISOString().slice(0, 10))
 const selectedMonth = ref(new Date().getMonth() + 1)
 const selectedYear  = ref(new Date().getFullYear())
 
-const months = [
-  {title:'January',value:1},{title:'February',value:2},{title:'March',value:3},
-  {title:'April',value:4},{title:'May',value:5},{title:'June',value:6},
-  {title:'July',value:7},{title:'August',value:8},{title:'September',value:9},
-  {title:'October',value:10},{title:'November',value:11},{title:'December',value:12},
-]
+const monthNames: Record<string, string[]> = {
+  en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+  th: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
+}
+const months = computed(() =>
+  (monthNames[locale.value] || monthNames.en).map((title, i) => ({ title, value: i + 1 }))
+)
 
 const currentYear = new Date().getFullYear()
 const years = Array.from({ length: 5 }, (_, i) => ({ title: String(currentYear - i), value: currentYear - i }))
