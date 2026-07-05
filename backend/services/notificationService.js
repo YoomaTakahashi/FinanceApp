@@ -15,10 +15,11 @@ async function getAll(userId, query = {}) {
 
   const where = conditions.join(' AND ');
 
-  const [[{ total }], [rows]] = await Promise.all([
+  const [[countRows], [rows]] = await Promise.all([
     pool.query(`SELECT COUNT(*) AS total FROM notifications WHERE ${where}`, params),
     pool.query(`SELECT * FROM notifications WHERE ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`, [...params, lim, offset]),
   ]);
+  const total = countRows[0].total;
 
   const [[{ unread }]] = await pool.query(
     'SELECT COUNT(*) AS unread FROM notifications WHERE user_id = ? AND is_read = 0',

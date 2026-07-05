@@ -42,10 +42,11 @@ async function getAll(userId, query = {}) {
     LIMIT ? OFFSET ?
   `;
 
-  const [[{ total }], [rows]] = await Promise.all([
+  const [[countRows], [rows]] = await Promise.all([
     pool.query(countSql, params),
     pool.query(dataSql, [...params, lim, offset]),
   ]);
+  const total = countRows[0].total;
 
   return { data: rows, meta: buildPaginationMeta(total, pg, lim) };
 }
