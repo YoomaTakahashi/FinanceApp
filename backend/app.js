@@ -26,8 +26,19 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
+// FRONTEND_URL may be a single origin or a comma-separated list
+// (e.g. production + preview URLs on Vercel).
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')
+  .split(',')
+  .map((o) => o.trim().replace(/\/$/, ''))
+  .filter(Boolean)
+  .concat(['http://localhost:3000', 'http://localhost:3001']);
+
 app.use(cors({
-  origin:      [process.env.FRONTEND_URL || 'http://localhost:3000', 'http://localhost:3001'],
+  origin(origin, cb) {
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    cb(new Error(`CORS: origin ${origin} not allowed`));
+  },
   credentials: true,
   methods:     ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
 }));
