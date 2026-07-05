@@ -21,7 +21,11 @@
       "Bash(git push *)",
       "Bash(rm -rf .vercel .output)",
       "Bash(VERCEL=1 npm run generate)",
-      "Bash(NITRO_PRESET=static VERCEL=1 npm run generate)"
+      "Bash(NITRO_PRESET=static VERCEL=1 npm run generate)",
+      "Bash(npx nuxt *)",
+      "Bash(git commit -m 'fix: Vuetify entry CSS not linked in production HTML *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(MYSQL_URL=\"mysql://root:secretpw@mysql.railway.internal:3306/railway\" node -e \"require\\('./config/database'\\).testConnection\\(1,100\\)\")"
     ]
   }
 }
