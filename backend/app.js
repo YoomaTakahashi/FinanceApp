@@ -27,16 +27,25 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 // FRONTEND_URL may be a single origin or a comma-separated list
-// (e.g. production + preview URLs on Vercel).
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')
+// (e.g. production + preview URLs on Vercel). An entry may contain "*"
+// as a wildcard for one URL segment, e.g. https://financeapp-*.vercel.app —
+// keep the pattern project-specific; never allow all of *.vercel.app.
+const originEntries = (process.env.FRONTEND_URL || 'http://localhost:3000')
   .split(',')
   .map((o) => o.trim().replace(/\/$/, ''))
   .filter(Boolean)
   .concat(['http://localhost:3000', 'http://localhost:3001']);
 
+const originMatchers = originEntries.map((entry) => {
+  if (!entry.includes('*')) return (origin) => origin === entry;
+  const re = new RegExp('^' + entry.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '[a-z0-9-]+') + '$', 'i');
+  return (origin) => re.test(origin);
+});
+
 app.use(cors({
   origin(origin, cb) {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    if (!origin || originMatchers.some((match) => match(origin))) return cb(null, true);
+    console.warn(`CORS blocked origin: ${origin} (allowed: ${originEntries.join(', ')})`);
     cb(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
