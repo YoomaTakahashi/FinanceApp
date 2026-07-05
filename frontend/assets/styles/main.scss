@@ -1,0 +1,289 @@
+// ═══════════════════════════════════════════════
+// FINANCE APP — GLOBAL STYLES
+// Luxury Black & Gold Theme
+// ═══════════════════════════════════════════════
+
+// ── Variables ──────────────────────────────────
+$gold:       #C9A84C;
+$gold-light: #E8C97B;
+$gold-dark:  #9B7D32;
+$black:      #080808;
+$surface:    #111111;
+$surface-2:  #1A1A1A;
+$surface-3:  #222222;
+$border:     rgba(255, 255, 255, 0.08);
+$text-muted: rgba(255, 255, 255, 0.5);
+
+// ── Base Reset ─────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+// Font switching by locale class on <html>
+html.lang-th, html.lang-th * { font-family: 'Prompt', sans-serif !important; }
+html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif !important; }
+
+// ── Scrollbar ──────────────────────────────────
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: #111; }
+::-webkit-scrollbar-thumb  { background: #2a2a2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: $gold-dark; }
+
+// ── Glass Card ─────────────────────────────────
+.glass-card {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.v-theme--dark .glass-card {
+  background:    rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+.v-theme--light .glass-card {
+  background:    rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+.glass-card-gold {
+  background:    rgba(201, 168, 76, 0.06) !important;
+  border: 1px solid rgba(201, 168, 76, 0.2) !important;
+}
+
+// ── Gold Gradient Text ─────────────────────────
+.gold-text {
+  background: linear-gradient(135deg, $gold-light 0%, $gold 50%, $gold-dark 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ── Stat Cards ─────────────────────────────────
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+// ── Income/Expense Colors ──────────────────────
+.income-text  { color: #66BB6A !important; }
+.expense-text { color: #EF5350 !important; }
+.income-bg    { background: rgba(102, 187, 106, 0.12) !important; }
+.expense-bg   { background: rgba(239, 83, 80, 0.12) !important; }
+
+// ── Hover Effects ──────────────────────────────
+.hover-gold {
+  transition: color 0.2s ease;
+  &:hover { color: $gold !important; }
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
+    border-color: rgba(201, 168, 76, 0.2) !important;
+  }
+}
+
+// ── Skeleton Loader ────────────────────────────
+@keyframes shimmer {
+  0%   { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+.skeleton {
+  background-size: 800px 100px;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+.v-theme--dark .skeleton {
+  background: linear-gradient(to right, #1a1a1a 8%, #222 18%, #1a1a1a 33%);
+}
+.v-theme--light .skeleton {
+  background: linear-gradient(to right, #e8e8e8 8%, #f0f0f0 18%, #e8e8e8 33%);
+}
+
+// ── Page Transitions ───────────────────────────
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.25s ease;
+}
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+}
+
+// ── Number Counter ─────────────────────────────
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-up {
+  animation: countUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ── Floating Animation ─────────────────────────
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+// ── Gold Button ────────────────────────────────
+.btn-gold {
+  background: linear-gradient(135deg, $gold-light, $gold, $gold-dark) !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s ease !important;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4) !important;
+  }
+}
+
+// ── Divider Gold ──────────────────────────────
+.divider-gold {
+  border-color: rgba(201, 168, 76, 0.3) !important;
+}
+
+// ── Badge ─────────────────────────────────────
+.badge-gold {
+  background: linear-gradient(135deg, $gold-light, $gold) !important;
+  color: #000 !important;
+}
+
+// ── Table ─────────────────────────────────────
+.finance-table {
+  .v-data-table__tr {
+    transition: background 0.2s ease;
+    &:hover { background: rgba(128,128,128,0.06) !important; }
+  }
+}
+
+// ── Empty State ───────────────────────────────
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+// ── Chip Status ───────────────────────────────
+.status-completed { color: #66BB6A; }
+.status-pending   { color: #FFB547; }
+.status-cancelled { color: #EF5350; }
+
+// ── Responsive Typography ─────────────────────
+.text-display {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.text-headline {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+}
+
+// ── Image Preview ─────────────────────────────
+.slip-preview {
+  border: 2px dashed $border;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+  &:hover { border-color: $gold; }
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// ── Sidebar ───────────────────────────────────
+.nav-item {
+  border-radius: 12px !important;
+  margin: 2px 8px !important;
+  transition: all 0.2s ease !important;
+  &:hover {
+    background: rgba(201, 168, 76, 0.08) !important;
+  }
+  &.active, &--active {
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)) !important;
+    border-left: 3px solid $gold !important;
+    color: $gold !important;
+  }
+}
+
+// ── Input Focus ───────────────────────────────
+.v-field--focused .v-field__outline { color: $gold !important; }
+
+// ── Notification Badge ────────────────────────
+.notif-badge .v-badge__badge {
+  background: linear-gradient(135deg, $gold-light, $gold) !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
+// ── Pulse Animation ───────────────────────────
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.pulse { animation: pulse 2s ease-in-out infinite; }
+
+// ── Chart Container ───────────────────────────
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+// ── Mobile Touch ──────────────────────────────
+@media (hover: none) {
+  .card-hover:hover {
+    transform: none;
+  }
+}

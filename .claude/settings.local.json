@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "PowerShell(npm run *)",
+      "Bash(grep -v \"//\\\\|env\")",
+      "PowerShell(mysql *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\" -u root --execute=\"source C:/Users/aSUS_NB/Documents/pr/backend/database/schema.sql\" 2>&1)",
+      "PowerShell(& \"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\" -u root -p\"\" --execute=\"source C:/Users/aSUS_NB/Documents/pr/backend/database/schema.sql\" 2>&1)",
+      "PowerShell(Get-Content \"C:\\\\Users\\\\aSUS_NB\\\\Documents\\\\pr\\\\backend\\\\database\\\\schema.sql\" | & \"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\" -u root -p\"\" 2>&1)"
+    ]
+  }
+}

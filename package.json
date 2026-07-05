@@ -1,0 +1,11 @@
+{
+  "name": "finance-app-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal Finance App — Root workspace",
+  "scripts": {
+    "dev:backend":  "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all":  "cd backend && npm install && cd ../frontend && npm install"
+  }
+}
