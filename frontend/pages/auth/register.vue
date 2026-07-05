@@ -107,7 +107,7 @@ async function handleRegister() {
 
 <style scoped lang="scss">
 .login-card {
-  border: 1px solid rgba(201, 168, 76, 0.15) !important;
+  border: 1px solid rgba(65, 169, 224, 0.25) !important;
   background: rgba(255,255,255,0.03) !important;
   backdrop-filter: blur(30px);
 }

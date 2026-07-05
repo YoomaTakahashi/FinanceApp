@@ -4,7 +4,7 @@ import { useApi } from '~/composables/useApi'
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
     settings: {
-      theme:          'dark',
+      theme:          'light',
       currency:       'USD',
       currency_symbol: '$',
       language:       'en',

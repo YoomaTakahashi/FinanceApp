@@ -183,7 +183,7 @@ const stats = computed(() => {
   const s = dashStore.summary
   if (!s) return Array(4).fill({ label: '', amount: 0, icon: '', color: '' })
   return [
-    { label: t('stat.balance'),         amount: s.balance,         icon: 'mdi-wallet-outline',        color: '#C9A84C', trend: null },
+    { label: t('stat.balance'),         amount: s.balance,         icon: 'mdi-wallet-outline',        color: '#0084C6', trend: null },
     { label: t('stat.monthly_income'),  amount: s.monthly_income,  icon: 'mdi-trending-up',            color: '#66BB6A', trend: 'up' },
     { label: t('stat.monthly_expense'), amount: s.monthly_expense, icon: 'mdi-trending-down',          color: '#EF5350', trend: 'down' },
     { label: t('stat.yearly_income'),   amount: s.yearly_income,   icon: 'mdi-calendar-month-outline', color: '#4FC3F7', trend: null },
@@ -244,7 +244,7 @@ const chartOptions = computed(() => {
         backgroundColor: tooltipBg,
         titleColor:      tooltipTitle,
         bodyColor:       tooltipBody,
-        borderColor:     'rgba(201,168,76,0.3)',
+        borderColor:     'rgba(0,132,198,0.3)',
         borderWidth:     1,
         padding:         12,
       },

@@ -252,7 +252,7 @@ const barOptions = computed(() => {
         backgroundColor: tooltipBg,
         titleColor:      tooltipTitle,
         bodyColor:       tooltipBody,
-        borderColor:     'rgba(201,168,76,0.3)',
+        borderColor:     'rgba(0,132,198,0.3)',
         borderWidth:     1,
       },
     },

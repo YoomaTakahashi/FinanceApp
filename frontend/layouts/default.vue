@@ -1,5 +1,5 @@
 <template>
-  <v-app :theme="settingsStore.settings?.theme || 'dark'">
+  <v-app :theme="settingsStore.settings?.theme || 'light'">
     <!-- Navigation Drawer -->
     <v-navigation-drawer
       v-model="drawer"
@@ -210,8 +210,8 @@ onMounted(() => {
 .nav-logo {
   &__icon {
     width: 44px; height: 44px;
-    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
-    border: 1px solid rgba(201,168,76,0.3);
+    background: linear-gradient(135deg, rgba(0,132,198,0.2), rgba(0,132,198,0.05));
+    border: 1px solid rgba(0,132,198,0.3);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -236,14 +236,14 @@ onMounted(() => {
 .lang-btn { min-width: 36px !important; padding: 0 8px !important; }
 .lang-label { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
 :deep(.v-list-item--active) {
-  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)) !important;
-  border-left: 3px solid #C9A84C !important;
+  background: linear-gradient(135deg, rgba(0,132,198,0.15), rgba(0,132,198,0.05)) !important;
+  border-left: 3px solid #0084C6 !important;
 }
 :deep(.v-list-item__prepend .v-icon) {
   opacity: 0.7;
 }
 :deep(.v-list-item--active .v-list-item__prepend .v-icon) {
   opacity: 1;
-  color: #C9A84C !important;
+  color: #0084C6 !important;
 }
 </style>

@@ -10,14 +10,14 @@
         <v-btn
           variant="tonal"
           rounded="lg"
-          block
+          class="action-btn"
           @click="$emit('cancel')"
           :disabled="loading"
         >Cancel</v-btn>
         <v-btn
           :color="confirmColor || 'error'"
           rounded="lg"
-          block
+          class="action-btn"
           :loading="loading"
           @click="$emit('confirm')"
         >{{ confirmText || 'Delete' }}</v-btn>
@@ -40,3 +40,9 @@ defineEmits(['confirm', 'cancel'])
 
 const model = defineModel<boolean>()
 </script>
+
+<style scoped>
+.action-btn {
+  flex: 1 1 0;
+}
+</style>

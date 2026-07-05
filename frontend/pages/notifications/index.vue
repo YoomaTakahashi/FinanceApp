@@ -113,10 +113,10 @@ async function removeNotif(id: number) {
 
 function typeColor(type: string) {
   const map: Record<string, string> = {
-    system: '#C9A84C', daily: '#4FC3F7', weekly: '#66BB6A',
+    system: '#0084C6', daily: '#4FC3F7', weekly: '#66BB6A',
     monthly: '#FFB547', bill: '#EF5350', expense: '#EF5350', income: '#66BB6A',
   }
-  return map[type] || '#C9A84C'
+  return map[type] || '#0084C6'
 }
 
 function typeIcon(type: string) {
@@ -135,8 +135,8 @@ onMounted(() => notifStore.fetch())
   cursor: pointer;
   border: 1px solid rgba(var(--v-theme-on-surface), 0.06) !important;
   transition: all 0.2s ease;
-  &.unread { border-color: rgba(201,168,76,0.2) !important; }
-  &:hover { border-color: rgba(201,168,76,0.3) !important; background: rgba(var(--v-theme-on-surface), 0.03) !important; }
+  &.unread { border-color: rgba(0,132,198,0.25) !important; }
+  &:hover { border-color: rgba(0,132,198,0.4) !important; background: rgba(var(--v-theme-on-surface), 0.03) !important; }
 }
 .notif-icon {
   width: 40px; height: 40px;
@@ -147,7 +147,7 @@ onMounted(() => notifStore.fetch())
 .unread-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: #C9A84C;
+  background: #0084C6;
   flex-shrink: 0;
 }
 </style>

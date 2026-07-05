@@ -178,7 +178,7 @@ const editItem    = ref<any>(null)
 const deleteItem  = ref<any>(null)
 const formErrors  = reactive({ name: '' })
 
-const form = reactive({ name: '', type: 'expense', icon: 'mdi-tag', color: '#C9A84C' })
+const form = reactive({ name: '', type: 'expense', icon: 'mdi-tag', color: '#0084C6' })
 
 const iconOptions = [
   'mdi-food', 'mdi-car', 'mdi-home', 'mdi-shopping', 'mdi-receipt',
@@ -190,7 +190,7 @@ const iconOptions = [
 ]
 
 const colorOptions = [
-  '#C9A84C', '#4CAF50', '#F44336', '#2196F3', '#9C27B0',
+  '#0084C6', '#052962', '#4CAF50', '#F44336', '#9C27B0',
   '#FF9800', '#00BCD4', '#E91E63', '#607D8B', '#795548',
   '#3F51B5', '#009688', '#FF5722', '#8BC34A', '#FFC107',
 ]
@@ -207,7 +207,7 @@ function typeLabel(type: string) {
 
 function openAdd() {
   editItem.value = null
-  Object.assign(form, { name: '', type: 'expense', icon: 'mdi-tag', color: '#C9A84C' })
+  Object.assign(form, { name: '', type: 'expense', icon: 'mdi-tag', color: '#0084C6' })
   formErrors.name = ''
   showDialog.value = true
 }
@@ -284,8 +284,8 @@ onMounted(() => catStore.fetch())
   cursor: pointer;
   transition: all 0.2s;
   color: rgba(var(--v-theme-on-surface), 0.5);
-  &:hover { border-color: #C9A84C; color: #C9A84C; }
-  &.selected { border-color: #C9A84C; background: rgba(201,168,76,0.15); color: #C9A84C; }
+  &:hover { border-color: #0084C6; color: #0084C6; }
+  &.selected { border-color: #0084C6; background: rgba(0,132,198,0.15); color: #0084C6; }
 }
 .color-grid {
   display: flex;

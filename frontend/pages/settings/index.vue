@@ -138,7 +138,7 @@ const { t }         = useLocale()
 const saving        = ref(false)
 
 const form = reactive({
-  theme:           'dark',
+  theme:           'light',
   currency:        'USD',
   currency_symbol: '$',
   language:        'en',

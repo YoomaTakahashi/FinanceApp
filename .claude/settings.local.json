@@ -25,7 +25,22 @@
       "Bash(npx nuxt *)",
       "Bash(git commit -m 'fix: Vuetify entry CSS not linked in production HTML *)",
       "Bash(echo \"exit=$?\")",
-      "Bash(MYSQL_URL=\"mysql://root:secretpw@mysql.railway.internal:3306/railway\" node -e \"require\\('./config/database'\\).testConnection\\(1,100\\)\")"
+      "Bash(MYSQL_URL=\"mysql://root:secretpw@mysql.railway.internal:3306/railway\" node -e \"require\\('./config/database'\\).testConnection\\(1,100\\)\")",
+      "Bash(git fetch *)",
+      "Bash(railway whoami *)",
+      "Bash(railway link *)",
+      "Bash(railway status *)",
+      "Bash(railway variables *)",
+      "Bash(railway logs *)",
+      "Bash(railway redeploy *)",
+      "Bash(railway domain *)",
+      "Bash(grep -rn \"localhost:5000\\\\|localhost:3000\\\\|127.0.0.1\" pages components composables stores plugins utils nuxt.config.ts)",
+      "Bash(grep -rln \"apiBase\" pages components composables stores plugins utils)",
+      "Bash(vercel --version)",
+      "Bash(npx --yes vercel --version)",
+      "Bash(npx --yes vercel whoami)",
+      "Bash(npx vercel *)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }

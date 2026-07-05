@@ -1,18 +1,19 @@
 // ═══════════════════════════════════════════════
 // FINANCE APP — GLOBAL STYLES
-// Luxury Black & Gold Theme
+// Guardian Blue & White Theme
 // ═══════════════════════════════════════════════
 
 // ── Variables ──────────────────────────────────
-$gold:       #C9A84C;
-$gold-light: #E8C97B;
-$gold-dark:  #9B7D32;
-$black:      #080808;
-$surface:    #111111;
-$surface-2:  #1A1A1A;
-$surface-3:  #222222;
-$border:     rgba(255, 255, 255, 0.08);
-$text-muted: rgba(255, 255, 255, 0.5);
+// (class names keep the legacy "gold" naming; values are Guardian blues)
+$gold:       #0084C6;
+$gold-light: #41A9E0;
+$gold-dark:  #052962;
+$black:      #061325;
+$surface:    #0A1F3C;
+$surface-2:  #0E2A4E;
+$surface-3:  #12345E;
+$border:     rgba(5, 41, 98, 0.12);
+$text-muted: rgba(5, 41, 98, 0.55);
 
 // ── Base Reset ─────────────────────────────────
 *, *::before, *::after { box-sizing: border-box; }
@@ -32,9 +33,9 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
 
 // ── Scrollbar ──────────────────────────────────
 ::-webkit-scrollbar       { width: 6px; height: 6px; }
-::-webkit-scrollbar-track  { background: #111; }
-::-webkit-scrollbar-thumb  { background: #2a2a2a; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: $gold-dark; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #B9CCE0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: $gold; }
 
 // ── Glass Card ─────────────────────────────────
 .glass-card {
@@ -51,8 +52,8 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
 }
 .glass-card-gold {
-  background:    rgba(201, 168, 76, 0.06) !important;
-  border: 1px solid rgba(201, 168, 76, 0.2) !important;
+  background:    rgba(0, 132, 198, 0.06) !important;
+  border: 1px solid rgba(0, 132, 198, 0.25) !important;
 }
 
 // ── Gold Gradient Text ─────────────────────────
@@ -70,7 +71,7 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 20px 60px rgba(5, 41, 98, 0.18) !important;
   }
   &::before {
     content: '';
@@ -80,7 +81,7 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,132,198,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
 }
@@ -102,8 +103,8 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
   cursor: pointer;
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
-    border-color: rgba(201, 168, 76, 0.2) !important;
+    box-shadow: 0 12px 40px rgba(5, 41, 98, 0.15) !important;
+    border-color: rgba(0, 132, 198, 0.3) !important;
   }
 }
 
@@ -167,26 +168,26 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
 
 // ── Gold Button ────────────────────────────────
 .btn-gold {
-  background: linear-gradient(135deg, $gold-light, $gold, $gold-dark) !important;
-  color: #000 !important;
+  background: linear-gradient(135deg, #0A4D8F, $gold-dark) !important;
+  color: #FFF !important;
   font-weight: 600 !important;
   letter-spacing: 0.5px !important;
   transition: all 0.3s ease !important;
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(5, 41, 98, 0.4) !important;
   }
 }
 
 // ── Divider Gold ──────────────────────────────
 .divider-gold {
-  border-color: rgba(201, 168, 76, 0.3) !important;
+  border-color: rgba(0, 132, 198, 0.35) !important;
 }
 
 // ── Badge ─────────────────────────────────────
 .badge-gold {
   background: linear-gradient(135deg, $gold-light, $gold) !important;
-  color: #000 !important;
+  color: #FFF !important;
 }
 
 // ── Table ─────────────────────────────────────
@@ -249,10 +250,10 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
   margin: 2px 8px !important;
   transition: all 0.2s ease !important;
   &:hover {
-    background: rgba(201, 168, 76, 0.08) !important;
+    background: rgba(0, 132, 198, 0.08) !important;
   }
   &.active, &--active {
-    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)) !important;
+    background: linear-gradient(135deg, rgba(0,132,198,0.15), rgba(0,132,198,0.05)) !important;
     border-left: 3px solid $gold !important;
     color: $gold !important;
   }
@@ -264,7 +265,7 @@ html.lang-en, html.lang-en * { font-family: 'Roboto', -apple-system, sans-serif 
 // ── Notification Badge ────────────────────────
 .notif-badge .v-badge__badge {
   background: linear-gradient(135deg, $gold-light, $gold) !important;
-  color: #000 !important;
+  color: #FFF !important;
   font-weight: 700 !important;
 }
 

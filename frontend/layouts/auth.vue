@@ -29,7 +29,7 @@
 <style scoped lang="scss">
 .auth-layout {
   min-height: 100vh;
-  background: #080808;
+  background: linear-gradient(160deg, #041E4A 0%, #052962 60%, #063A7A 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,13 +50,13 @@
     opacity: 0.15;
     &--1 {
       width: 600px; height: 600px;
-      background: radial-gradient(circle, #C9A84C, transparent);
+      background: radial-gradient(circle, #41A9E0, transparent);
       top: -200px; right: -200px;
       animation: float 8s ease-in-out infinite;
     }
     &--2 {
       width: 400px; height: 400px;
-      background: radial-gradient(circle, #9B7D32, transparent);
+      background: radial-gradient(circle, #0084C6, transparent);
       bottom: -100px; left: -100px;
       animation: float 10s ease-in-out infinite reverse;
     }
@@ -66,8 +66,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 }
@@ -88,12 +88,18 @@
 
   &__icon {
     width: 52px; height: 52px;
-    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
-    border: 1px solid rgba(201,168,76,0.3);
+    background: linear-gradient(135deg, rgba(65,169,224,0.25), rgba(65,169,224,0.08));
+    border: 1px solid rgba(65,169,224,0.4);
     border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    span {
+      background: linear-gradient(135deg, #FFFFFF, #41A9E0);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
   }
 }
 

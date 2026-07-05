@@ -40,7 +40,7 @@ defineProps<{ error?: { statusCode?: number; message?: string } }>()
 <style scoped lang="scss">
 .error-page {
   min-height: 100vh;
-  background: #080808;
+  background: linear-gradient(160deg, #041E4A 0%, #052962 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +55,7 @@ defineProps<{ error?: { statusCode?: number; message?: string } }>()
     position: absolute;
     width: 800px; height: 800px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(65,169,224,0.08) 0%, transparent 70%);
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
@@ -67,5 +67,8 @@ defineProps<{ error?: { statusCode?: number; message?: string } }>()
   line-height: 1;
   letter-spacing: -6px;
   margin-bottom: 24px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #41A9E0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 </style>

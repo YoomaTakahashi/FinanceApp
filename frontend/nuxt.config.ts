@@ -29,6 +29,10 @@ export default defineNuxtConfig({
     },
   ],
 
+  components: [
+    { path: '~/components', pathPrefix: false },
+  ],
+
   css: [
     'vuetify/styles',
     '@mdi/font/css/materialdesignicons.css',
@@ -65,7 +69,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Track income, expenses, and grow your wealth' },
-        { name: 'theme-color', content: '#080808' },
+        { name: 'theme-color', content: '#052962' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
