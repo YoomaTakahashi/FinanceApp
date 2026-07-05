@@ -7,7 +7,21 @@
       "PowerShell(mysql *)",
       "PowerShell(& \"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\" -u root --execute=\"source C:/Users/aSUS_NB/Documents/pr/backend/database/schema.sql\" 2>&1)",
       "PowerShell(& \"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\" -u root -p\"\" --execute=\"source C:/Users/aSUS_NB/Documents/pr/backend/database/schema.sql\" 2>&1)",
-      "PowerShell(Get-Content \"C:\\\\Users\\\\aSUS_NB\\\\Documents\\\\pr\\\\backend\\\\database\\\\schema.sql\" | & \"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\" -u root -p\"\" 2>&1)"
+      "PowerShell(Get-Content \"C:\\\\Users\\\\aSUS_NB\\\\Documents\\\\pr\\\\backend\\\\database\\\\schema.sql\" | & \"C:\\\\Program Files\\\\MySQL\\\\MySQL Server 8.0\\\\bin\\\\mysql.exe\" -u root -p\"\" 2>&1)",
+      "Bash(curl -s http://localhost:5000/api/health)",
+      "Bash(curl *)",
+      "Bash(node -e \"const d=require\\('C:/Users/aSUS_NB/AppData/Local/Temp/claude/C--Users-aSUS-NB-Documents-pr/cdb98e4c-62b9-40c6-b879-05e99df7863e/scratchpad/login.json'\\); console.log\\(d.data.accessToken\\)\")",
+      "Bash(node *)",
+      "Bash(npm run *)",
+      "Bash(npx --yes serve -l 4173 .output/public)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'fix: pagination total always undefined in transactions and notifications lists *)",
+      "Bash(git commit -m 'fix: CSS build issue for production deployment *)",
+      "Bash(git commit -m 'chore: stabilize deployment for Vercel + Railway *)",
+      "Bash(git push *)",
+      "Bash(rm -rf .vercel .output)",
+      "Bash(VERCEL=1 npm run generate)",
+      "Bash(NITRO_PRESET=static VERCEL=1 npm run generate)"
     ]
   }
 }
